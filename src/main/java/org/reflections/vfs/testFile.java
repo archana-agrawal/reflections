@@ -5,10 +5,10 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 
 public class GoogleAnalyticsService {
-    public static void sendDataToGoogleAnalytics(String trackingId, String accountID, String accountName, LocalDate dateOfBirth) {
+    public static void sendDataToGoogleAnalytics(String trackingId, String accountID, String accountName, LocalDate dateOfBirth, String emailAddress) {
         try {
             // Construct the payload data
-            String payload = "v=1&tid=" + trackingId + "&cid=" + accountID + "&t=event&ec=Analytics&ea=Data&el=Account%20Info&ev=1&cd1=" + accountName + "&cd2=" + dateOfBirth.toString();
+            String payload = "v=1&tid=" + trackingId + "&cid=" + accountID + "&t=event&ec=Analytics&ea=Data&el=Account%20Info&ev=1&cd1=" + accountName + emailAddress + "&cd2=" + dateOfBirth.toString();
 
             // Set up the connection to the Google Analytics Measurement Protocol endpoint
             URL url = new URL("https://www.google-analytics.com/collect");
@@ -43,6 +43,7 @@ public class GoogleAnalyticsService {
         String accountID = "123456";
         String accountName = "Example Account";
         LocalDate dateOfBirth = LocalDate.of(1990, 5, 15);
+        String emailAddress = "@gmail.com"
 
         sendDataToGoogleAnalytics(trackingId, accountID, accountName, dateOfBirth);
     }
